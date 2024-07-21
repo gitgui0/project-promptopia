@@ -1,11 +1,11 @@
 import Prompt from "@models/prompt";
 import { connectToDB } from "@utils/database";
 
-export const GET = async (request) => {
+export async function GET(request) {
   try {
     await connectToDB();
 
-    // Extract search query from URL
+    // Use URLSearchParams to get search parameters
     const { searchParams } = new URL(request.url);
     const searchText = searchParams.get("search") || ""; // Get the search text if it exists
 
@@ -29,4 +29,4 @@ export const GET = async (request) => {
     console.error("Error fetching prompts:", error);
     return new Response("Failed to fetch prompts", { status: 500 });
   }
-};
+}
